@@ -100,11 +100,6 @@
   footer .fmeta { font-size:12.5px; line-height:1.7; text-align:right; }
   footer .fmeta a { text-decoration:none; border-bottom:1px solid rgba(18,16,12,.35); }
 
-  /* review-only: field color test dots (removed in production) */
-  .fieldtest { position:fixed; right:14px; bottom:14px; display:flex; gap:6px; align-items:center; background:rgba(255,255,255,.9); border:1px solid var(--hair); padding:7px 9px; border-radius:20px; }
-  .fieldtest span { font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); margin-right:2px; }
-  .fieldtest button { width:16px; height:16px; border-radius:50%; border:1px solid rgba(18,16,12,.25); cursor:pointer; }
-
   @media (max-width:760px) {
     .field-home { padding:28px 22px 24px; }
     .cols { grid-template-columns:1fr 1fr; gap:20px; }
@@ -426,43 +421,15 @@
   </footer>
 </div>
 
-<!-- review-only chrome: test the five fields without reloading -->
-<div class="fieldtest" title="Review only — removed in production">
-  <span>Field</span>
-</div>
-
 <script>
   // ── rotating field color ──────────────────────────────────────────────
-  // A different color every visit: constant within a session, guaranteed
-  // different from the previous visit.
-  const FIELDS = [
-    { name:"marigold", hex:"#E4A234" },
-    { name:"pool",     hex:"#8FC4CF" },
-    { name:"sage",     hex:"#A9BC9B" },
-    { name:"salmon",   hex:"#E0967E" },
-    { name:"iris",     hex:"#A9A5C9" },
-  ];
-  function setField(i) {
-    document.documentElement.style.setProperty("--field", FIELDS[i].hex);
-    sessionStorage.setItem("fieldIdx", i);
-  }
-  let idx = sessionStorage.getItem("fieldIdx");
-  if (idx === null) {
-    const last = parseInt(localStorage.getItem("lastFieldIdx") ?? "-1", 10);
-    do { idx = Math.floor(Math.random() * FIELDS.length); } while (idx === last);
-    localStorage.setItem("lastFieldIdx", idx);
-  }
-  setField(+idx);
-
-  // review-only dots
-  const ft = document.querySelector(".fieldtest");
-  FIELDS.forEach((f, i) => {
-    const b = document.createElement("button");
-    b.style.background = f.hex;
-    b.title = f.name;
-    b.addEventListener("click", () => setField(i));
-    ft.appendChild(b);
-  });
+  // A fresh color on every page load, guaranteed different from the last.
+  const FIELDS = ["#E4A234", "#8FC4CF", "#A9BC9B", "#E0967E", "#A9A5C9"];
+  const last = parseInt(localStorage.getItem("lastFieldIdx") ?? "-1", 10);
+  let idx;
+  do { idx = Math.floor(Math.random() * FIELDS.length); } while (idx === last);
+  localStorage.setItem("lastFieldIdx", idx);
+  document.documentElement.style.setProperty("--field", FIELDS[idx]);
 
   // ── audience switcher (the Sweeney move) ─────────────────────────────
   // each statement is hand-broken to exactly 3 lines
