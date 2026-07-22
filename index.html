@@ -711,7 +711,7 @@
     pages.forEach(p => p.classList.toggle("on", p.dataset.page === id));
     navs.forEach(a => a.classList.toggle("on", a.dataset.nav === id && !!a.closest("nav")));
     window.scrollTo(0, 0);
-    if (id === "chronology") requestAnimationFrame(sizeHelix);
+    if (id === "chronology") sizeHelix();
   }
   navs.forEach(a => a.addEventListener("click", e => { e.preventDefault(); show(a.dataset.nav); }));
 
@@ -721,7 +721,9 @@
   let births = [], H = 0, W = 84;
   function sizeHelix() {
     if (!wavesEl.offsetParent) return;
-    H = wavesEl.scrollHeight;
+    // run the braid past the last era, down to the footer's edge
+    const foot = document.querySelector('[data-page="chronology"] footer');
+    H = Math.round(foot.getBoundingClientRect().top - wavesEl.getBoundingClientRect().top);
     const dpr = window.devicePixelRatio || 1;
     helix.width = W * dpr; helix.height = H * dpr;
     helix.style.height = H + "px";
@@ -752,6 +754,7 @@
     if (!ticking) { ticking = true; requestAnimationFrame(() => { drawHelix(); ticking = false; }); }
   }, { passive: true });
   window.addEventListener("resize", sizeHelix);
+  window.addEventListener("load", sizeHelix);
 
   show(new URLSearchParams(location.search).get("page") || "home");
 </script>
