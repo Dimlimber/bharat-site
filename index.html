@@ -756,6 +756,23 @@
   // the four helix strands take the other four colors, shuffled
   const STRANDS = FIELDS.filter((_, i) => i !== idx).sort(() => Math.random() - 0.5);
 
+  // favicon: BK in a circle of the visit's color
+  (function () {
+    const c = document.createElement("canvas");
+    c.width = c.height = 64;
+    const x = c.getContext("2d");
+    x.beginPath(); x.arc(32, 32, 32, 0, Math.PI * 2);
+    x.fillStyle = FIELDS[idx]; x.fill();
+    x.fillStyle = "#12100C";
+    x.font = "700 26px 'Helvetica Neue', Helvetica, Arial, sans-serif";
+    x.textAlign = "center"; x.textBaseline = "middle";
+    x.fillText("BK", 32, 34);
+    const link = document.createElement("link");
+    link.rel = "icon"; link.type = "image/png";
+    link.href = c.toDataURL("image/png");
+    document.head.appendChild(link);
+  })();
+
   // ── audience switcher — each statement hand-broken to exactly 3 lines ─
   const AUDIENCES = {
     everyone: 'I have led change for 30 years:<br>technology, transactions, transformation.<br>AI is the fourth wave.',
