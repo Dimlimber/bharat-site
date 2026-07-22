@@ -377,36 +377,39 @@
       <div class="entry">
         <div class="idcol">
           <h4>1 · The Machine</h4>
-          <p class="ety">How the model works inside: attention, sampling, training, embeddings, tokens.</p>
+          <p class="ety">The kinds of model, and choosing the right one for the job.</p>
         </div>
         <div class="txtcol">
           <div class="facts" style="margin-top:2px;">
-            <div><span class="k">Built</span><span>Ran open vision models on my own hardware to find where they break. Benchmarked five models on one task, fairly.</span></div>
-            <div><span class="k">Learned</span><span>Most failures I blamed on the model were in how I ran it.</span></div>
+            <div><span class="k">Built</span><span>Worked hands-on across the range of model types: small and large language models, embedding models, vision models, and OCR-plus-language-model pipelines. Built each system around the kind that fit the job, not the biggest one.</span></div>
+            <div><span class="k">Studies</span><span>Comparative model performance. Benchmarked language models, vision models, and embeddings against large language models — same task, same answer key, changing only the model, so the score reflects the model and not the setup.</span></div>
+            <div><span class="k">Learned</span><span>Models are just tools, like hammers and chisels. Use the one best suited for the job and know its features and limitations.</span></div>
           </div>
         </div>
       </div>
       <div class="entry">
         <div class="idcol">
           <h4>2 · Building on the Model</h4>
-          <p class="ety">Getting reliable answers out: prompts, structured output, orchestration, retrieval.</p>
+          <p class="ety">Wrapping the model in engines that make its output reliable and repeatable.</p>
         </div>
         <div class="txtcol">
           <div class="facts" style="margin-top:2px;">
-            <div><span class="k">Built</span><span>The antilibrary engine: five specialized agents in a line, each with a versioned, tested prompt.</span></div>
-            <div><span class="k">Learned</span><span>A prompt is a contract, not a string. Version it and test it.</span></div>
+            <div><span class="k">Built</span><span>Deterministic engines on top of the model — a classification engine and a discovery engine — that wrap the model's judgment in authored, versioned structure, so the same input gives the same traceable output run after run.</span></div>
+            <div><span class="k">Studies</span><span>Where the intelligence should live: in the model, or the engine around it. Replaced a stochastic step that drifted run to run with a fixed, authored structure, and split the work between a small model to group and a large one to judge, until the output was repeatable and traceable.</span></div>
+            <div><span class="k">Learned</span><span>Reliability lives in the engine you build around the model, not in the model itself.</span></div>
           </div>
         </div>
       </div>
       <div class="entry">
         <div class="idcol">
           <h4>3 · The Harness</h4>
-          <p class="ety">Running the system in production: cost, caching, tracing, failure modes.</p>
+          <p class="ety">Running the system in production: cost, tracing, scheduling, and what to strip.</p>
         </div>
         <div class="txtcol">
           <div class="facts" style="margin-top:2px;">
-            <div><span class="k">Built</span><span>Rebuilt an engine backend around caching and token discipline. One render got nine times cheaper.</span></div>
-            <div><span class="k">Learned</span><span>Cost lives in the context window, not on the price sheet.</span></div>
+            <div><span class="k">Built</span><span>Rebuilt the engine behind anti-library.ai as a harness that logs every model call's tokens, cost, and time to one ledger. Set up a scheduler that re-runs only what changed, not the whole library. Designed the system with the model as a swappable part, and tagged every component permanent or temporary so the harness sheds its scaffolding as models improve.</span></div>
+            <div><span class="k">Studies</span><span>Where the money goes. Redesigned how one job prompts the model and cut its token use to a tenth. Priced the same task across different engines to see where cost concentrates, and traced a pipeline call by call — testing whether a fix-loop would go quadratic (it didn't).</span></div>
+            <div><span class="k">Learned</span><span>Instrument before you build. Then the traces tell you which parts to keep and which to strip as the models improve.</span></div>
           </div>
         </div>
       </div>
@@ -417,32 +420,35 @@
         </div>
         <div class="txtcol">
           <div class="facts" style="margin-top:2px;">
-            <div><span class="k">Built</span><span>A grounding check that runs at every step, so agents check agents.</span></div>
-            <div><span class="k">Learned</span><span>Fabrication is the trust metric. The guarantees live in the harness, not the model.</span></div>
+            <div><span class="k">Built</span><span>An independent evaluator that grades the pipeline from the outside, so the system that produces the work is never the one grading it. Checked at every step that each claim traces to its evidence, so an error is caught where it is created, not at the end of the chain. Kept a person in the loop: the evaluator proposes, a human confirms or corrects, and nothing is deleted automatically.</span></div>
+            <div><span class="k">Studies</span><span>Can the checker be trusted? Planted known errors to prove the evaluator catches them, ran a clean A/B on whether an agentic checking loop helps (it barely did), and sealed the answers before each run so the method is scored, not a result already seen.</span></div>
+            <div><span class="k">Learned</span><span>One checker is never enough, and each has to come at the problem from a different angle. Share the generator's method and you share its blind spot.</span></div>
           </div>
         </div>
       </div>
       <div class="entry">
         <div class="idcol">
           <h4>5 · Product &amp; Human Interface</h4>
-          <p class="ety">Where the model meets the person.</p>
+          <p class="ety">Making the model generate beauty, and make hard ideas land.</p>
         </div>
         <div class="txtcol">
           <div class="facts" style="margin-top:2px;">
-            <div><span class="k">Built</span><span>Three products anyone can open in a browser today.</span></div>
-            <div><span class="k">Learned</span><span>The interface earns the trust. The person keeps the judgment.</span></div>
+            <div><span class="k">Built</span><span>Made beauty a working feature of AI output, not decoration. Built visualizations that keep every outlier and hard fact in, and still land with a wow. Created napkinsolo.ai, an engine that distills heavy source material into single hand-drawn sketches that land one hard idea at a glance.</span></div>
+            <div><span class="k">Studies</span><span>Studied what the leading thinkers on beauty say, from mathematics (Hardy) to design (Tufte) to architecture (Alexander) to wabi-sabi (Koren). Found that beauty can be calculated, emergent, and organic all at once, but one theme runs through every account: restraint, reached by subtracting. Encapsulated that as a method of five tests I run when building the human interface.</span></div>
+            <div><span class="k">Learned</span><span>Left to itself, a model fails two ways: it floods you with words, or it drops what matters. Beauty is not its natural instinct, so you have to work with methods to create it.</span></div>
           </div>
         </div>
       </div>
       <div class="entry">
         <div class="idcol">
           <h4>6 · The Boardroom</h4>
-          <p class="ety">Value, strategy, and governance: what this wave does to an operating model.</p>
+          <p class="ety">Value, strategy, and governance: rebuilding the operating model for a decade of change.</p>
         </div>
         <div class="txtcol">
           <div class="facts" style="margin-top:2px;">
-            <div><span class="k">Built</span><span>A capability map that translates all of the above for an executive audience.</span></div>
-            <div><span class="k">Learned</span><span>The constraint is the organization, not the model.</span></div>
+            <div><span class="k">Built</span><span>An AIOS framework for adopting AI across an organization, past the usual list of short-term use cases. Reframed the board's question from use cases that pay off immediately to incrementally building a foundation that carries a decade of change. Mapped the new roles that emerge in an organization, and the work of managing agents alongside people.</span></div>
+            <div><span class="k">Studies</span><span>Assessed how 10+ organizations outside technology and finance are adopting AI, and found nearly all stuck in one of two early stages: giving staff an assistant like Copilot or Claude, or buying select AI tools from vendors. None had begun to rebuild the company around a machine-readable operating system. The barrier was rarely technology; it was a lack of deep understanding and long-term view.</span></div>
+            <div><span class="k">Learned</span><span>The paradox: you need a long-term view, and fast, reversible experiments to get there. When technology is emerging fast, you have to get on the learning curve and yet walk away from the sunk costs of failed experiments.</span></div>
           </div>
         </div>
       </div>
