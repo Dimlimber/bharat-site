@@ -7,13 +7,12 @@
 <title>Bharat Khandelwal</title>
 <style>
   :root {
-    --field:#E4A234;            /* rotates per visit — see script */
+    --field:#E4A234;            /* rotates per load — see script */
     --ink:#12100C;
     --soft:#3A362E;
     --muted:#6E6B62;
     --faint:#98948A;
     --hair:#E5E2DA;
-    --hair-dark:#12100C;
     --paper:#FFFFFF;
     --serif:"Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
     --sans:"Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -24,11 +23,9 @@
 
   .page { display:none; }
   .page.on { display:block; }
-
   a { color:var(--ink); }
 
   /* ═══ HOME — the field ═══ */
-  /* header geometry mirrors .sitehead exactly: 10px (band) + 14px topbar padding */
   .field-home { min-height:100vh; background:var(--field); display:flex; flex-direction:column; padding:10px 0 40px; }
   .field-home .shell { width:100%; }
   .field-home .topbar { padding:14px 0 13px; }
@@ -39,23 +36,22 @@
   .aud a { font-size:13.5px; text-decoration:none; cursor:pointer; opacity:.52; width:fit-content; }
   .aud a:hover { opacity:.8; }
   .aud a.on { opacity:1; font-weight:700; }
-  /* statements are art-directed to exactly 3 lines via <br>; nowrap guards the breaks */
   .statement { font-family:var(--serif); font-size:clamp(28px, 3.4vw, 42px); font-weight:400; line-height:1.22; letter-spacing:-.01em; white-space:nowrap; transition:opacity .18s ease; }
-  @media (max-width:760px) {
-    .statement { white-space:normal; }
-    .statement br { display:none; }
-  }
   .statement em { font-style:italic; }
   .statement .amp { opacity:.45; }
   .wordmark { font-weight:700; font-size:clamp(48px, 6.6vw, 84px); letter-spacing:-.045em; line-height:.94; }
   .wordmark span { display:block; }
+  @media (max-width:760px) {
+    .statement { white-space:normal; }
+    .statement br { display:none; }
+  }
 
   /* ═══ inner chrome ═══ */
   .band { height:10px; background:var(--field); }
   .sitehead { position:sticky; top:0; z-index:20; background:var(--paper); border-bottom:1px solid var(--hair); }
   .sitehead .topbar { padding:14px 0 13px; }
   .shell { max-width:1060px; margin:0 auto; padding:0 48px; }
-  .topbar { display:flex; justify-content:flex-end; align-items:baseline; padding:26px 0 0; }
+  .topbar { display:flex; justify-content:flex-end; align-items:baseline; }
   .topbar nav { display:flex; gap:24px; }
   .topbar nav a { font-size:13.5px; text-decoration:none; padding-bottom:3px; border-bottom:2px solid transparent; cursor:pointer; }
   .topbar nav a:hover { border-bottom-color:var(--hair); }
@@ -63,34 +59,73 @@
 
   .phead { padding:72px 0 0; }
   .phead h2 { font-size:clamp(26px, 3vw, 34px); font-weight:700; letter-spacing:-.02em; }
-  .phead .lede { margin-top:16px; font-family:var(--serif); font-style:italic; font-size:20px; line-height:1.5; color:var(--soft); max-width:52ch; }
+  .phead .lede { margin-top:16px; font-family:var(--serif); font-style:italic; font-size:20px; line-height:1.5; color:var(--soft); max-width:54ch; }
 
   .sechead { margin-top:72px; border-top:2px solid var(--ink); padding-top:16px; }
   .sechead .no { font-size:11px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); }
   .sechead h3 { font-size:21px; font-weight:700; letter-spacing:-.01em; margin-top:8px; }
   .sechead .slede { margin-top:8px; font-family:var(--serif); font-style:italic; font-size:17px; color:var(--muted); }
 
-  /* entry rows — the Judd catalog treatment */
   .entry { display:grid; grid-template-columns:250px 1fr; gap:44px; padding:34px 0 38px; border-bottom:1px solid var(--hair); }
   .entry:last-child { border-bottom:none; }
   .entry .idcol h4 { font-size:19px; font-weight:700; letter-spacing:-.01em; }
   .entry .idcol .ety { font-size:12px; color:var(--muted); margin-top:7px; line-height:1.6; }
-  .entry .idcol .open { display:inline-block; margin-top:16px; font-size:12.5px; font-weight:700; text-decoration:none; border-bottom:2px solid var(--field); padding-bottom:2px; }
+  .entry .idcol .open { display:inline-block; margin-top:16px; font-size:12.5px; font-weight:700; text-decoration:none; border-bottom:2px solid var(--field); padding-bottom:2px; cursor:pointer; }
   .entry .txtcol .lede { font-family:var(--serif); font-style:italic; font-size:17.5px; line-height:1.5; margin-bottom:12px; }
   .entry .txtcol p.body { font-size:14.5px; line-height:1.65; color:var(--soft); max-width:60ch; }
   .facts { margin-top:18px; border-top:1px solid var(--ink); max-width:560px; }
   .facts div { display:flex; padding:7px 0; border-bottom:1px solid var(--hair); font-size:12.5px; }
   .facts .k { width:110px; font-weight:700; flex-shrink:0; }
 
-  .cover { width:120px; aspect-ratio:29/40; background:#F1EFE9; border:1px solid var(--hair); display:flex; align-items:flex-end; padding:9px; }
-  .cover span { font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); }
-  .bookgrid { display:grid; grid-template-columns:250px 120px 1fr; gap:44px; padding:34px 0 38px; border-bottom:1px solid var(--hair); align-items:start; }
-  .bookgrid:last-child { border-bottom:none; }
-
   .prose p { font-size:15px; line-height:1.7; color:var(--soft); max-width:58ch; margin-bottom:14px; }
   .sidefacts { font-size:12.5px; color:var(--muted); line-height:1.6; }
   .sidefacts .k { display:block; font-size:10.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin:16px 0 4px; }
-  .sidefacts a { text-decoration:none; border-bottom:1px solid var(--hair-dark); }
+  .sidefacts .k:first-child { margin-top:0; }
+  .sidefacts a { text-decoration:none; border-bottom:1px solid var(--ink); }
+
+  /* career list (chronology) */
+  .career { margin-top:22px; border-top:1px solid var(--ink); }
+  .career div { display:grid; grid-template-columns:150px 1fr; gap:24px; padding:10px 0; border-bottom:1px solid var(--hair); font-size:13.5px; }
+  .career .yr { font-weight:700; }
+  .career .role b { font-weight:700; }
+  .career .role span { color:var(--muted); }
+
+  /* the four waves (chronology) */
+  .waves { position:relative; padding-left:104px; }
+  #helix { position:absolute; left:0; top:0; width:84px; pointer-events:none; }
+  .era { display:grid; grid-template-columns:250px 1fr; gap:44px; padding:44px 0 48px; border-bottom:1px solid var(--hair); }
+  .era:last-child { border-bottom:none; }
+  .era .idcol h4 { font-size:19px; font-weight:700; letter-spacing:-.01em; }
+  .era .idcol .yrs { font-size:12px; font-weight:700; letter-spacing:.1em; color:var(--muted); margin-bottom:10px; }
+  .sketchbox { width:100%; aspect-ratio:3/2; background:#F4F2EC; border:1px dashed #C9C4B6; display:flex; flex-direction:column; justify-content:flex-end; padding:12px; margin-top:14px; }
+  .sketchbox span { font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); line-height:1.6; }
+  .era .cols2 { font-size:14.5px; line-height:1.68; color:var(--soft); columns:2; column-gap:36px; }
+  .era .cols2 p { margin-bottom:12px; break-inside:avoid-column; }
+  .era .cols2 p b { color:var(--ink); }
+  @media (max-width:900px) {
+    .waves { padding-left:0; }
+    #helix { display:none; }
+    .era .cols2 { columns:1; }
+  }
+
+  /* heatmap (work with AI) */
+  .heatwrap { margin-top:26px; }
+  .heat { display:grid; grid-auto-flow:column; grid-template-rows:repeat(7, 15px); gap:3px; width:fit-content; }
+  .heat i { width:15px; height:15px; display:block; background:#EFEDE7; }
+  .heat i.f { border:1px dashed var(--hair); background:transparent; }
+  .heat i.c1 { background:color-mix(in srgb, var(--field) 28%, #fff); }
+  .heat i.c2 { background:color-mix(in srgb, var(--field) 52%, #fff); }
+  .heat i.c3 { background:color-mix(in srgb, var(--field) 76%, #fff); }
+  .heat i.c4 { background:var(--field); }
+  .heatmeta { display:flex; justify-content:space-between; align-items:center; max-width:560px; margin-top:12px; }
+  .heatmeta .cap { font-size:12.5px; color:var(--muted); }
+  .legend { display:flex; align-items:center; gap:3px; font-size:10.5px; color:var(--faint); }
+  .legend i { width:11px; height:11px; display:block; }
+
+  /* books (publications) */
+  .cover { width:120px; aspect-ratio:29/40; background:#F1EFE9; border:1px solid var(--hair); display:flex; align-items:flex-end; padding:9px; }
+  .cover span { font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); }
+  .bookgrid { display:grid; grid-template-columns:250px 120px 1fr; gap:44px; padding:34px 0 38px; border-bottom:1px solid var(--hair); align-items:start; }
 
   footer { margin-top:110px; background:var(--field); }
   footer .shell { padding-top:46px; padding-bottom:38px; }
@@ -101,12 +136,10 @@
   footer .fmeta a { text-decoration:none; border-bottom:1px solid rgba(18,16,12,.35); }
 
   @media (max-width:760px) {
-    .field-home { padding:28px 22px 24px; }
-    .cols { grid-template-columns:1fr 1fr; gap:20px; }
+    .field-home .shell.mid { padding:56px 22px; }
     .shell { padding:0 22px; }
-    .topbar { flex-direction:column; gap:12px; }
-    .entry { grid-template-columns:1fr; gap:18px; }
-    .bookgrid { grid-template-columns:1fr; gap:18px; }
+    .entry, .era, .bookgrid { grid-template-columns:1fr; gap:18px; }
+    .career div { grid-template-columns:1fr; gap:2px; }
     footer .frow { flex-direction:column; align-items:flex-start; }
     footer .fmeta { text-align:left; }
   }
@@ -120,7 +153,7 @@
     <div class="shell">
       <div class="topbar">
         <nav>
-          <a data-nav="work">Work</a><a data-nav="engines">Engines</a><a data-nav="writing">Writing</a><a data-nav="about">About</a>
+          <a data-nav="chronology">Chronology</a><a data-nav="ai">Work with AI</a><a data-nav="playground">Playground</a><a data-nav="publications">Publications</a><a data-nav="about">About</a>
         </nav>
       </div>
     </div>
@@ -128,10 +161,10 @@
       <div class="aud">
         <a class="on" data-aud="everyone">For everyone</a>
         <a data-aud="clients">Clients</a>
-        <a data-aud="researchers">Researchers</a>
+        <a data-aud="boards">Boards &amp; investors</a>
         <a data-aud="consultants">Consultants</a>
       </div>
-      <div class="statement" id="statement">I build AI that <em>thinks</em> more like<br>humans <span class="amp">—</span> and help people<br>work better with it.</div>
+      <div class="statement" id="statement">Thirty years of transformative change <span class="amp">—</span><br>technology, transactions, transformation <span class="amp">—</span><br>and now its fourth wave: AI.</div>
     </div>
     <div class="shell">
       <div class="wordmark"><span>BHARAT</span><span>KHANDELWAL</span></div>
@@ -139,96 +172,207 @@
   </div>
 </div>
 
-<!-- ═══ WORK ═══ -->
-<div class="page" data-page="work">
+<!-- ═══ CHRONOLOGY ═══ -->
+<div class="page" data-page="chronology">
   <div class="sitehead">
     <div class="band"></div>
     <div class="shell">
       <div class="topbar">
         <nav>
-          <a data-nav="work">Work</a><a data-nav="engines">Engines</a><a data-nav="writing">Writing</a><a data-nav="about">About</a>
+          <a data-nav="chronology">Chronology</a><a data-nav="ai">Work with AI</a><a data-nav="playground">Playground</a><a data-nav="publications">Publications</a><a data-nav="about">About</a>
         </nav>
       </div>
     </div>
   </div>
   <div class="shell">
-
     <div class="phead">
-      <h2>Work</h2>
-      <p class="lede">Two halves of one practice: I build AI engines that reason the way people do — and I help people and organizations work better with the tools that will reshape them.</p>
+      <h2>Chronology</h2>
+      <p class="lede">One problem in many costumes, for thirty years: how organizations actually change.</p>
+    </div>
+
+    <div class="entry" style="margin-top:40px; border-top:2px solid var(--ink); padding-top:30px; border-bottom:none;">
+      <div class="idcol sidefacts">
+        <span class="k">Now</span>
+        Managing Director &amp; Partner, Fashion &amp; Luxury Sector Lead, Alvarez &amp; Marsal — New York.
+      </div>
+      <div class="prose">
+        <p>Bharat Khandelwal is a senior executive and operator with twenty-five-plus years unlocking growth for consumer, retail, and apparel companies navigating stagnation, disruption, and structural change — leading channel shifts to digital-first DTC, repositioning brands for demand-centric growth, and instilling the operational discipline to sustain it. Trusted by investors, boards, and management to step into complex mandates and deliver results.</p>
+      </div>
     </div>
 
     <div class="sechead">
-      <span class="no">Half one</span>
-      <h3>What I build</h3>
-      <p class="slede">Engines that reason the way a person does — then run it at scale.</p>
+      <span class="no">Career &amp; education</span>
+      <h3>The record</h3>
     </div>
-    <div class="entry" style="padding-top:26px;">
-      <div class="idcol">
-        <h4>The method</h4>
-        <p class="ety">Anyone can demo a multi-agent toy. The discipline is making it trustworthy.</p>
-        <a class="open" data-nav="engines">Selected engines →</a>
-      </div>
-      <div class="txtcol">
-        <div class="facts" style="margin-top:2px; max-width:640px;">
-          <div><span class="k">Orchestrated</span><span>Specialized agents hand off in a line — not one prompt doing everything.</span></div>
-          <div><span class="k">Checked</span><span>Parakh · परख — a grounding assay at every step; agents check agents.</span></div>
-          <div><span class="k">Timed</span><span>Taal · ताल — each engine fires on its own clock; a living system.</span></div>
-          <div><span class="k">Human-gated</span><span>Darpan · दर्पण — the machine proposes; a person decides where it matters.</span></div>
+    <div class="career">
+      <div><span class="yr">2025 – 2026</span><span class="role"><b>Interim Chief Digital &amp; Information Officer</b>, Columbia Sportswear (NYSE: COLM) <span>· via A&amp;M</span></span></div>
+      <div><span class="yr">2024 –</span><span class="role"><b>Managing Director &amp; Partner</b>, Fashion &amp; Luxury Sector Lead, Alvarez &amp; Marsal</span></div>
+      <div><span class="yr">2023 – 2024</span><span class="role"><b>Partner &amp; Global Head, Commercial Transformation</b>, ERM <span>· KKR portfolio company</span></span></div>
+      <div><span class="yr">2011 – 2023</span><span class="role"><b>Managing Director &amp; Partner</b>, Boston Consulting Group <span>· Fashion &amp; Apparel | Technology</span></span></div>
+      <div><span class="yr">2004 – 2011</span><span class="role"><b>Partner, Transaction Advisory Services</b>, EY | Deloitte</span></div>
+      <div><span class="yr">1995 – 2004</span><span class="role"><b>Senior Technology Consultant → Program Lead</b>, Intelligroup</span></div>
+      <div><span class="yr">Education</span><span class="role">MBA, Columbia Business School (2004) <span>· M.Tech, Energy Management (1992) · B.Tech, Chemical Engineering, HBTI Kanpur (1991)</span></span></div>
+    </div>
+
+    <div class="sechead">
+      <span class="no">Four waves</span>
+      <h3>A chronology of change</h3>
+      <p class="slede">Each wave a different kind of change. They do not replace one another — they braid.</p>
+    </div>
+
+    <div class="waves" id="waves">
+      <canvas id="helix"></canvas>
+
+      <div class="era" data-era="1">
+        <div class="idcol">
+          <div class="yrs">1995 – 2004</div>
+          <h4>Technology</h4>
+          <div class="sketchbox"><span>Napkin-Solo sketch<br>Era 1 · planned change<br>— prompt in chat —</span></div>
+        </div>
+        <div class="cols2">
+          <p><b>The first decade was planned change.</b> Global ERP and supply-chain programs — the kind of change an organization chooses, budgets, and announces. Positive ambition, clear blueprints — and still hard. The plan survives nowhere intact; what makes planned change work is the discipline of rebuilding alignment country by country, go-live by go-live.</p>
+          <p>At Intelligroup, from consultant to program lead: ERP and digital platforms implemented across <b>10+ global companies</b> — and a reputation for salvaging programs that were delayed, over budget, or organizationally misaligned.</p>
         </div>
       </div>
-    </div>
 
-    <div class="sechead">
-      <span class="no">Half two</span>
-      <h3>How I help</h3>
-      <p class="slede">Thirty years of transformative change — now with AI.</p>
-    </div>
-    <div class="entry" style="padding-top:26px;">
-      <div class="idcol">
-        <h4>Ambition to Action</h4>
-        <p class="ety">Book · framework · app</p>
-        <a class="open" href="#">Open the A2A app ↗</a>
+      <div class="era" data-era="2">
+        <div class="idcol">
+          <div class="yrs">2004 – 2011</div>
+          <h4>Transactions</h4>
+          <div class="sketchbox"><span>Napkin-Solo sketch<br>Era 2 · unplanned change<br>— prompt in chat —</span></div>
+        </div>
+        <div class="cols2">
+          <p><b>The second decade was unplanned change.</b> Deals arrive suddenly, carry political weight, and compress critical decisions into weeks — often with significant change in personnel. Change without consensus, at speed, where judgment is the scarce resource.</p>
+          <p>A founding member of EY's strategy and transaction practice, later at Deloitte: <b>~25 global transactions</b> across the deal cycle — strategy, integration, carve-out, synergy realization — from Italy to China to Japan.</p>
+        </div>
       </div>
-      <div class="txtcol">
-        <p class="body">The most comprehensive research on transformative change — 150-plus studies across psychology, sociology, network science, and behavioral economics — distilled into a seven-element practitioner's framework, with a living companion app generated from one authored source.</p>
+
+      <div class="era" data-era="3">
+        <div class="idcol">
+          <div class="yrs">2011 – 2025</div>
+          <h4>Transformation</h4>
+          <div class="sketchbox"><span>Napkin-Solo sketch<br>Era 3 · chosen change<br>— prompt in chat —</span></div>
+        </div>
+        <div class="cols2">
+          <p><b>The third wave was transformation.</b> Change thrust on companies by market and technology dynamics — and taken on willingly. Underperformers deliberately becoming different; every company navigating digital, DTC, and omnichannel; a massive repooling of operating models and of people.</p>
+          <p>At BCG, helped build the US Fashion &amp; Apparel sector: <b>$1B+ in operating margin gains</b> across five global brands on a $15B+ revenue base, a −20% quarterly revenue trajectory reversed to −3%, a wholesale business pivoted to <b>$1B of US DTC</b>. Then ERM, Alvarez &amp; Marsal — and an interim CDIO chair at Columbia Sportswear.</p>
+        </div>
       </div>
-    </div>
-    <div class="entry">
-      <div class="idcol">
-        <h4>AIOS</h4>
-        <p class="ety">Enterprise · client work, by request</p>
-      </div>
-      <div class="txtcol">
-        <p class="body">A five-layer architecture that makes an enterprise legible to AI — from knowledge to agentic. The same disciplined build as the engines, at company scale.</p>
+
+      <div class="era" data-era="4">
+        <div class="idcol">
+          <div class="yrs">2026 –</div>
+          <h4>AI-led Transformative Force</h4>
+          <div class="sketchbox"><span>Napkin-Solo sketch<br>Era 4 · the braid<br>— prompt in chat —</span></div>
+        </div>
+        <div class="cols2">
+          <p><b>The fourth wave is just beginning.</b> Very rapid, technology-led transformation in which deep-seated companies can be unsettled by nimble small players — and business models are repriced at the same time as the technology. The most complex change environment of the four, and it is additive: every prior wave is still in the braid.</p>
+          <p>The answer is to learn it the way it has always been led — by doing. A structured practice across the whole stack (<a class="tx" data-nav="ai" style="border-bottom:1px solid var(--ink); text-decoration:none; cursor:pointer;">Work with AI</a>), and live engines built by hand (<a data-nav="playground" style="border-bottom:1px solid var(--ink); text-decoration:none; cursor:pointer;">Playground</a>).</p>
+        </div>
       </div>
     </div>
   </div>
   <footer>
     <div class="shell"><div class="frow">
       <div class="fwordmark" data-nav="home" title="Home"><span>BHARAT</span><span>KHANDELWAL</span></div>
-      <div class="fmeta"><a href="#">bharat@bharatkhandelwal.com</a><br><a href="#">LinkedIn</a><br>New York</div>
+      <div class="fmeta"><a href="mailto:bk2022@gmail.com">bk2022@gmail.com</a><br><a href="#">LinkedIn</a><br>New York</div>
     </div></div>
   </footer>
 </div>
 
-<!-- ═══ ENGINES ═══ -->
-<div class="page" data-page="engines">
+<!-- ═══ WORK WITH AI ═══ -->
+<div class="page" data-page="ai">
   <div class="sitehead">
     <div class="band"></div>
     <div class="shell">
       <div class="topbar">
         <nav>
-          <a data-nav="work">Work</a><a data-nav="engines">Engines</a><a data-nav="writing">Writing</a><a data-nav="about">About</a>
+          <a data-nav="chronology">Chronology</a><a data-nav="ai">Work with AI</a><a data-nav="playground">Playground</a><a data-nav="publications">Publications</a><a data-nav="about">About</a>
         </nav>
       </div>
     </div>
   </div>
   <div class="shell">
-
     <div class="phead">
-      <h2>Engines</h2>
-      <p class="lede">Selected engines from the practice — samples of how the method thinks, not a catalog. Each is orchestrated, checked, timed, and human-gated; each runs live at its own address.</p>
+      <h2>Work with AI</h2>
+      <p class="lede">Own the whole stack — from the token to the boardroom.</p>
+    </div>
+
+    <div class="entry" style="margin-top:40px; border-top:2px solid var(--ink); padding-top:30px; border-bottom:none;">
+      <div class="idcol sidefacts">
+        <span class="k">The bar</span>
+        A capability counts only when he can <em>build it</em> — and explain it from first principles well enough that people in his field learn it from him.
+      </div>
+      <div class="prose">
+        <p>AI is a once-in-a-century force of change — and it cannot be understood from the executive floor alone. This is a structured learning practice across the whole stack: every capability learned by building real things, every piece of work dated and filed under the shelf it advances.</p>
+      </div>
+    </div>
+
+    <div class="sechead">
+      <span class="no">The practice</span>
+      <h3>Day by day</h3>
+    </div>
+    <div class="heatwrap">
+      <div class="heat" id="heat"></div>
+      <div class="heatmeta">
+        <span class="cap"><b id="heat-total"></b> pieces of built work since June 29 — each dated, each filed.</span>
+        <span class="legend">less <i style="background:#EFEDE7"></i><i class="c1" style="background:color-mix(in srgb, var(--field) 28%, #fff)"></i><i style="background:color-mix(in srgb, var(--field) 52%, #fff)"></i><i style="background:color-mix(in srgb, var(--field) 76%, #fff)"></i><i style="background:var(--field)"></i> more</span>
+      </div>
+    </div>
+
+    <div class="sechead">
+      <span class="no">The capability map</span>
+      <h3>Six areas, forty-one shelves</h3>
+      <p class="slede">From how the model works inside, to what it means for the boardroom.</p>
+    </div>
+    <div class="facts" style="max-width:none; border-top:none; margin-top:20px;">
+      <div><span class="k" style="width:230px;">1 · The Machine</span><span>How the model works inside — attention and the transformer, sampling, training and scaling, embeddings, inference and tokens.</span></div>
+      <div><span class="k" style="width:230px;">2 · Building on the Model</span><span>Shaping the call and composing the system — prompts as versioned contracts, structured output, context engineering, multi-agent orchestration, tool use, retrieval.</span></div>
+      <div><span class="k" style="width:230px;">3 · The Harness</span><span>Running the system in production — cost, caching, tracing, failure modes.</span></div>
+      <div><span class="k" style="width:230px;">4 · Evaluation &amp; Trust</span><span>Evals, grounding checks, and why fabrication is the trust metric.</span></div>
+      <div><span class="k" style="width:230px;">5 · Product &amp; Human Interface</span><span>Where the model meets the person — and where judgment stays human.</span></div>
+      <div><span class="k" style="width:230px;">6 · The Boardroom</span><span>Value, strategy, and governance — what this wave means for the operating model.</span></div>
+    </div>
+
+    <div class="entry" style="border-bottom:none; padding-top:44px;">
+      <div class="idcol sidefacts">
+        <span class="k">The discipline</span>
+        Every engine he builds is held to the same four rules.
+      </div>
+      <div class="txtcol">
+        <div class="facts" style="margin-top:0;">
+          <div><span class="k" style="width:130px;">Orchestrated</span><span>Specialized agents hand off in a line — not one prompt doing everything.</span></div>
+          <div><span class="k" style="width:130px;">Checked</span><span>A grounding assay at every step — agents check agents.</span></div>
+          <div><span class="k" style="width:130px;">Timed</span><span>Each engine fires on its own clock — a living system.</span></div>
+          <div><span class="k" style="width:130px;">Human-gated</span><span>The machine proposes; a person decides where it matters.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="shell"><div class="frow">
+      <div class="fwordmark" data-nav="home" title="Home"><span>BHARAT</span><span>KHANDELWAL</span></div>
+      <div class="fmeta"><a href="mailto:bk2022@gmail.com">bk2022@gmail.com</a><br><a href="#">LinkedIn</a><br>New York</div>
+    </div></div>
+  </footer>
+</div>
+
+<!-- ═══ PLAYGROUND ═══ -->
+<div class="page" data-page="playground">
+  <div class="sitehead">
+    <div class="band"></div>
+    <div class="shell">
+      <div class="topbar">
+        <nav>
+          <a data-nav="chronology">Chronology</a><a data-nav="ai">Work with AI</a><a data-nav="playground">Playground</a><a data-nav="publications">Publications</a><a data-nav="about">About</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="shell">
+    <div class="phead">
+      <h2>Playground</h2>
+      <p class="lede">People who have not built cannot claim they know AI. Everything here was built to learn — and runs live.</p>
     </div>
 
     <div style="margin-top:44px;">
@@ -236,7 +380,7 @@
         <div class="idcol">
           <h4>(anti)library</h4>
           <p class="ety">Sanskrit · मन्थन manthan · to churn.<br>The cosmic ocean, churned until treasures rise.</p>
-          <a class="open" href="#">Open the engine ↗</a>
+          <a class="open" href="https://anti-library.ai?from=bk">Open the engine ↗</a>
         </div>
         <div class="txtcol">
           <p class="lede">A library is a self-portrait. The engine reads it.</p>
@@ -251,12 +395,12 @@
       <div class="entry">
         <div class="idcol">
           <h4>Napkin-Solo</h4>
-          <p class="ety">English · compound.<br>A napkin sketch, drawn alone — and a nod to the reluctant hero who trusted his own judgment.</p>
-          <a class="open" href="#">Open the engine ↗</a>
+          <p class="ety">English · compound.<br>A napkin sketch, drawn alone.</p>
+          <a class="open" href="https://napkinsolo.ai?from=bk">Open the engine ↗</a>
         </div>
         <div class="txtcol">
           <p class="lede">The hardest part of visual thinking is not the drawing. It is knowing what to draw.</p>
-          <p class="body">Feed it any text — a dense paper, a strategy brief, a tangled idea — and it extracts the one insight worth illustrating, then draws the napkin sketch that makes it land. No prompt engineering. The engine reads, thinks, and draws on its own.</p>
+          <p class="body">Feed it any text — a dense paper, a strategy brief, a tangled idea — and it extracts the one insight worth illustrating, then draws the napkin sketch that makes it land. The sketches through this site are its work.</p>
           <div class="facts">
             <div><span class="k">Status</span><span>Live — napkinsolo.ai</span></div>
           </div>
@@ -267,28 +411,23 @@
         <div class="idcol">
           <h4>Napkin Dōjō</h4>
           <p class="ety">Japanese · 道場 dōjō.<br>The place where you return, repeat, and the skill becomes yours.</p>
-          <a class="open" href="#">Open the engine ↗</a>
+          <a class="open" href="https://napkinsolo.ai/dojo?from=bk">Open the engine ↗</a>
         </div>
         <div class="txtcol">
           <p class="lede">We read a lot and remember little.</p>
           <p class="body">You finish a book, highlight an article, save a thread — a week later it is gone. The Dōjō brings the best ideas back, again and again, until knowing about them becomes knowing them.</p>
           <div class="facts">
-            <div><span class="k">Status</span><span>Live on the web — napkinsolo.ai/dojo · App Store edition coming</span></div>
+            <div><span class="k">Status</span><span>Live on the web — napkinsolo.ai/dojo</span></div>
           </div>
         </div>
       </div>
 
-      <div class="entry">
-        <div class="idcol">
-          <h4>Lagom</h4>
-          <p class="ety">Swedish · lagom · from lag om, "around the team." Just the right amount, no more.</p>
+      <div class="entry" style="padding-top:26px;">
+        <div class="idcol sidefacts">
+          <span class="k">In the works</span>
         </div>
         <div class="txtcol">
-          <p class="lede">A business thinker — not a general-purpose one.</p>
-          <p class="body">Lagom reasons about a business problem with the mental models that hold there — unit economics, second-order effects, incentives and moats, the shape of a market — settles the argument, then gives it form. It will not draw a single figure until the argument is complete.</p>
-          <div class="facts">
-            <div><span class="k">Status</span><span>In testing</span></div>
-          </div>
+          <p class="body"><b>Lagom</b> — a business thinker, not a general-purpose one: it reasons about a business problem with the mental models that hold there, settles the argument, and only then gives it form.</p>
         </div>
       </div>
     </div>
@@ -296,34 +435,37 @@
   <footer>
     <div class="shell"><div class="frow">
       <div class="fwordmark" data-nav="home" title="Home"><span>BHARAT</span><span>KHANDELWAL</span></div>
-      <div class="fmeta"><a href="#">bharat@bharatkhandelwal.com</a><br><a href="#">LinkedIn</a><br>New York</div>
+      <div class="fmeta"><a href="mailto:bk2022@gmail.com">bk2022@gmail.com</a><br><a href="#">LinkedIn</a><br>New York</div>
     </div></div>
   </footer>
 </div>
 
-<!-- ═══ WRITING ═══ -->
-<div class="page" data-page="writing">
+<!-- ═══ PUBLICATIONS ═══ -->
+<div class="page" data-page="publications">
   <div class="sitehead">
     <div class="band"></div>
     <div class="shell">
       <div class="topbar">
         <nav>
-          <a data-nav="work">Work</a><a data-nav="engines">Engines</a><a data-nav="writing">Writing</a><a data-nav="about">About</a>
+          <a data-nav="chronology">Chronology</a><a data-nav="ai">Work with AI</a><a data-nav="playground">Playground</a><a data-nav="publications">Publications</a><a data-nav="about">About</a>
         </nav>
       </div>
     </div>
   </div>
   <div class="shell">
-
     <div class="phead">
-      <h2>Writing</h2>
-      <p class="lede">Two books in progress — one on how change actually happens, one on how teams actually win.</p>
+      <h2>Publications</h2>
+      <p class="lede">Books, essays, and films — on change, brands, and the people who build.</p>
     </div>
 
-    <div style="margin-top:44px;">
-      <div class="bookgrid" style="border-top:2px solid var(--ink); padding-top:26px;">
+    <div class="sechead" style="margin-top:44px;">
+      <span class="no">Books</span>
+      <h3>Two in progress</h3>
+    </div>
+    <div>
+      <div class="bookgrid" style="padding-top:26px;">
         <div class="idcol">
-          <h4 style="font-size:19px; font-weight:700; letter-spacing:-.01em;">Ambition to Action</h4>
+          <h4 style="font-size:19px; font-weight:700;">Ambition to Action</h4>
           <p class="ety" style="font-size:12px; color:var(--muted); margin-top:7px; line-height:1.6;">Book · framework · app</p>
         </div>
         <div class="cover"><span>Cover</span></div>
@@ -336,16 +478,15 @@
           </div>
         </div>
       </div>
-
-      <div class="bookgrid">
+      <div class="bookgrid" style="border-bottom:none;">
         <div class="idcol">
-          <h4 style="font-size:19px; font-weight:700; letter-spacing:-.01em;">We Are Not a Family</h4>
+          <h4 style="font-size:19px; font-weight:700;">We Are Not a Family</h4>
           <p class="ety" style="font-size:12px; color:var(--muted); margin-top:7px; line-height:1.6;">Book · podcast</p>
         </div>
         <div class="cover"><span>Cover</span></div>
         <div class="txtcol">
           <p class="lede" style="font-family:var(--serif); font-style:italic; font-size:17.5px; line-height:1.5; margin-bottom:12px;">Work like a pro sports team — a guide to sustained success.</p>
-          <p class="body" style="font-size:14.5px; line-height:1.65; color:var(--soft); max-width:56ch;">Inspired by the Netflix culture deck: why the family metaphor fails organizations, and what the professional-team alternative demands of leaders and players alike.</p>
+          <p class="body" style="font-size:14.5px; line-height:1.65; color:var(--soft); max-width:56ch;">Why the family metaphor fails organizations, and what the professional-team alternative demands of leaders and players alike.</p>
           <div class="facts">
             <div><span class="k">Status</span><span>In progress</span></div>
             <div><span class="k">Companion</span><span>wearenotafamily.com · the podcast</span></div>
@@ -353,11 +494,34 @@
         </div>
       </div>
     </div>
+
+    <div class="sechead">
+      <span class="no">Selected writing</span>
+      <h3>Essays &amp; articles</h3>
+    </div>
+    <div class="facts" style="max-width:none; border-top:none; margin-top:20px;">
+      <div><span class="k" style="width:230px;">Growth</span><span><a href="#" style="text-decoration:none; border-bottom:1px solid var(--hair);">Paradigms of Growth</a></span></div>
+      <div><span class="k" style="width:230px;">Purpose &amp; brands</span><span><a href="#" style="text-decoration:none; border-bottom:1px solid var(--hair);">How Brands Can Grow and Stay True to Their Purpose</a></span></div>
+      <div><span class="k" style="width:230px;">Future of work</span><span><a href="#" style="text-decoration:none; border-bottom:1px solid var(--hair);">Work Will Never Be the Same</a> · <a href="#" style="text-decoration:none; border-bottom:1px solid var(--hair);">Hybrid Work Is the New Remote Work</a></span></div>
+      <div><span class="k" style="width:230px;">Omnichannel</span><span><a href="#" style="text-decoration:none; border-bottom:1px solid var(--hair);">Scaling the Store of the Future</a></span></div>
+      <div><span class="k" style="width:230px;">Marketing</span><span><a href="#" style="text-decoration:none; border-bottom:1px solid var(--hair);">The Creative Destruction of Fashion Marketing</a></span></div>
+      <div><span class="k" style="width:230px;">Innovation</span><span><a href="#" style="text-decoration:none; border-bottom:1px solid var(--hair);">The Tower &amp; The Wheel — Cousins and Mutants</a></span></div>
+    </div>
+
+    <div class="sechead">
+      <span class="no">Film &amp; video</span>
+      <h3>Voices, raised</h3>
+    </div>
+    <div class="facts" style="max-width:none; border-top:none; margin-top:20px;">
+      <div><span class="k" style="width:230px;">Voices Raised</span><span>Concept &amp; creative director — a video series celebrating women in STEM: Jean Jennings Bartik, Grace Hopper, Dr. Alice Mary Stewart, Ada Lovelace, Vera Rubin.</span></div>
+      <div><span class="k" style="width:230px;">Time of The Unseen</span><span>Writer, narrator, and concept — a poem and film for the frontline workers of 2020, those who wear no uniforms.</span></div>
+      <div><span class="k" style="width:230px;">We Are Not a Family</span><span>The companion podcast — on Apple Podcasts.</span></div>
+    </div>
   </div>
   <footer>
     <div class="shell"><div class="frow">
       <div class="fwordmark" data-nav="home" title="Home"><span>BHARAT</span><span>KHANDELWAL</span></div>
-      <div class="fmeta"><a href="#">bharat@bharatkhandelwal.com</a><br><a href="#">LinkedIn</a><br>New York</div>
+      <div class="fmeta"><a href="mailto:bk2022@gmail.com">bk2022@gmail.com</a><br><a href="#">LinkedIn</a><br>New York</div>
     </div></div>
   </footer>
 </div>
@@ -369,61 +533,48 @@
     <div class="shell">
       <div class="topbar">
         <nav>
-          <a data-nav="work">Work</a><a data-nav="engines">Engines</a><a data-nav="writing">Writing</a><a data-nav="about">About</a>
+          <a data-nav="chronology">Chronology</a><a data-nav="ai">Work with AI</a><a data-nav="playground">Playground</a><a data-nav="publications">Publications</a><a data-nav="about">About</a>
         </nav>
       </div>
     </div>
   </div>
   <div class="shell">
-
     <div class="phead">
       <h2>About</h2>
-      <p class="lede">For thirty years, one problem in many costumes: how people and organizations actually change.</p>
+      <p class="lede">Quiet introspection and lively conversations.</p>
     </div>
 
-    <div class="entry" style="margin-top:40px; border-top:2px solid var(--ink); padding-top:30px;">
+    <div class="entry" style="margin-top:40px; border-top:2px solid var(--ink); padding-top:30px; border-bottom:none;">
       <div class="idcol sidefacts">
-        <span class="k">Note</span>
-        Draft bio — career facts to be confirmed with Bharat before launch.
-        <span class="k">Also</span>
-        Occasional investor — B Capital, Karmen AI, BeeCure, 4T2, 52TEN.
         <span class="k">Contact</span>
-        <a href="#">bharat@bharatkhandelwal.com</a>
+        <a href="mailto:bk2022@gmail.com">bk2022@gmail.com</a>
+        <span class="k">Elsewhere</span>
+        LinkedIn · New York
+        <span class="k">Note</span>
+        <em>Investments section — still under discussion.</em>
       </div>
       <div class="prose">
-        <p>For thirty years I have worked on one problem in many costumes: how people and organizations actually change — not how they say they will, but what genuinely moves them from ambition to action.</p>
-        <p>That work now has a second half. I build AI engines that reason the way people do, and I help organizations get ready for the change AI asks of them. The two halves feed each other: the engines are disciplined by what I know about people, and the advisory work is grounded by what I learn building.</p>
-        <p>I live between the practice, the engines, the books — and a library of about seven hundred books that turned out to be a self-portrait.</p>
+        <p>I love business. Human creativity is manifested in goods and services, exchanged and kept alive through business — the ultimate engine that takes what people imagine and puts it to work in the world. That idea sits underneath everything here: the practice, the engines, the books.</p>
+        <p>Away from the work: reading, writing, weightlifting, meditating — and a library of about seven hundred books that turned out to be a self-portrait.</p>
       </div>
     </div>
 
-    <div class="sechead">
-      <span class="no">Values</span>
-      <h3>What I hold to</h3>
-    </div>
-    <div class="entry" style="padding-top:22px;">
-      <div class="idcol"></div>
-      <div class="txtcol">
-        <div class="facts" style="margin-top:0; max-width:640px; border-top:none;">
-          <div><span class="k" style="width:130px;">Grounded</span><span>Every claim traces to its evidence. In the engines a hard check; in the work a habit.</span></div>
-          <div><span class="k" style="width:130px;">Human-gated</span><span>Machines propose; people decide. The judgment call stays where it belongs.</span></div>
-          <div><span class="k" style="width:130px;">Orchestrated</span><span>Specialists in a line beat a generalist doing everything — in agents and in teams.</span></div>
-          <div><span class="k" style="width:130px;">Lagom</span><span>Just the right amount, no more. In scope, in design, in words.</span></div>
-        </div>
-      </div>
+    <div class="sechead" style="margin-top:20px;">
+      <span class="no">The words</span>
+      <h3>Who I am, in twelve words</h3>
+      <p class="slede">Placeholder — the twelve words from the exercise go here.</p>
     </div>
   </div>
   <footer>
     <div class="shell"><div class="frow">
       <div class="fwordmark" data-nav="home" title="Home"><span>BHARAT</span><span>KHANDELWAL</span></div>
-      <div class="fmeta"><a href="#">bharat@bharatkhandelwal.com</a><br><a href="#">LinkedIn</a><br>New York</div>
+      <div class="fmeta"><a href="mailto:bk2022@gmail.com">bk2022@gmail.com</a><br><a href="#">LinkedIn</a><br>New York</div>
     </div></div>
   </footer>
 </div>
 
 <script>
   // ── rotating field color ──────────────────────────────────────────────
-  // A fresh color on every page load, guaranteed different from the last.
   const FIELDS = ["#E4A234", "#8FC4CF", "#A9BC9B", "#E0967E", "#A9A5C9"];
   const last = parseInt(localStorage.getItem("lastFieldIdx") ?? "-1", 10);
   let idx;
@@ -431,12 +582,11 @@
   localStorage.setItem("lastFieldIdx", idx);
   document.documentElement.style.setProperty("--field", FIELDS[idx]);
 
-  // ── audience switcher (the Sweeney move) ─────────────────────────────
-  // each statement is hand-broken to exactly 3 lines
+  // ── audience switcher — each statement hand-broken to exactly 3 lines ─
   const AUDIENCES = {
-    everyone: 'I build AI that <em>thinks</em> more like<br>humans <span class="amp">—</span> and help people<br>work better with it.',
+    everyone: 'Thirty years of transformative change <span class="amp">—</span><br>technology, transactions, transformation <span class="amp">—</span><br>and now its fourth wave: AI.',
     clients: 'The constraint on enterprise AI is<br>the organization, not the model <span class="amp">—</span><br>I help organizations get ready.',
-    researchers: 'I build engines that reason in metaphor,<br>in threads, in argument <span class="amp">—</span><br>checked at every step.',
+    boards: 'Trusted to step into complex mandates <span class="amp">—</span><br>turnarounds, transitions, disruptions <span class="amp">—</span><br>and deliver measurable results.',
     consultants: 'Thirty years of making change stick <span class="amp">—</span><br>a framework, two books,<br>and a method you can run.',
   };
   const stEl = document.getElementById("statement");
@@ -445,10 +595,7 @@
       e.preventDefault();
       document.querySelectorAll("[data-aud]").forEach(x => x.classList.toggle("on", x === a));
       stEl.style.opacity = 0;
-      setTimeout(() => {
-        stEl.innerHTML = AUDIENCES[a.dataset.aud];
-        stEl.style.opacity = 1;
-      }, 180);
+      setTimeout(() => { stEl.innerHTML = AUDIENCES[a.dataset.aud]; stEl.style.opacity = 1; }, 180);
     });
   });
 
@@ -459,8 +606,72 @@
     pages.forEach(p => p.classList.toggle("on", p.dataset.page === id));
     navs.forEach(a => a.classList.toggle("on", a.dataset.nav === id && !!a.closest("nav")));
     window.scrollTo(0, 0);
+    if (id === "chronology") requestAnimationFrame(sizeHelix);
   }
   navs.forEach(a => a.addEventListener("click", e => { e.preventDefault(); show(a.dataset.nav); }));
+
+  // ── heatmap — real data from the learning practice ────────────────────
+  const HEAT = {"2026-06-29":2,"2026-07-01":2,"2026-07-02":3,"2026-07-03":3,"2026-07-07":2,"2026-07-09":2,"2026-07-10":2,"2026-07-11":4,"2026-07-12":3,"2026-07-13":4,"2026-07-16":4,"2026-07-17":3,"2026-07-18":4,"2026-07-20":3,"2026-07-21":2};
+  (function () {
+    const grid = document.getElementById("heat");
+    const start = new Date("2026-06-29T00:00:00");   // a Monday
+    const today = new Date("2026-07-22T00:00:00");   // comp snapshot date
+    let total = 0;
+    for (let d = 0; d < 56; d++) {
+      const day = new Date(start.getTime() + d * 86400000);
+      const key = day.toISOString().slice(0, 10);
+      const n = HEAT[key] || 0;
+      total += n;
+      const cell = document.createElement("i");
+      if (day > today) cell.className = "f";
+      else if (n) cell.className = "c" + Math.min(n, 4);
+      cell.title = key + (n ? " — " + n + " pieces of work" : "");
+      grid.appendChild(cell);
+    }
+    document.getElementById("heat-total").textContent = total;
+  })();
+
+  // ── the helix — four waves braiding, driven by scroll ────────────────
+  const helix = document.getElementById("helix");
+  const wavesEl = document.getElementById("waves");
+  let births = [], H = 0, W = 84;
+  function sizeHelix() {
+    if (!wavesEl.offsetParent) return;
+    H = wavesEl.scrollHeight;
+    const dpr = window.devicePixelRatio || 1;
+    helix.width = W * dpr; helix.height = H * dpr;
+    helix.style.height = H + "px";
+    helix.getContext("2d").setTransform(dpr, 0, 0, dpr, 0, 0);
+    births = [...wavesEl.querySelectorAll(".era")].map(e => e.offsetTop + 30);
+    drawHelix();
+  }
+  function drawHelix() {
+    if (!H) return;
+    const ctx = helix.getContext("2d");
+    ctx.clearRect(0, 0, W, H);
+    const phase = window.scrollY * 0.0045;
+    const field = getComputedStyle(document.documentElement).getPropertyValue("--field").trim();
+    for (let k = 0; k < 4; k++) {
+      const birth = births[k] ?? 0;
+      ctx.beginPath();
+      for (let y = birth; y <= H; y += 6) {
+        const ramp = Math.min(1, (y - birth) / 160);        // amplitude fades in after birth
+        const x = 42 + 18 * ramp * Math.sin(y * 0.018 + phase + k * (Math.PI / 2));
+        y === birth ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = k === 3 ? field : "#12100C";
+      ctx.lineWidth = k === 3 ? 2 : 1.3;
+      ctx.globalAlpha = k === 3 ? 1 : 0.85;
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+  let ticking = false;
+  window.addEventListener("scroll", () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(() => { drawHelix(); ticking = false; }); }
+  }, { passive: true });
+  window.addEventListener("resize", sizeHelix);
+
   show(new URLSearchParams(location.search).get("page") || "home");
 </script>
 
