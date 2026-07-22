@@ -755,15 +755,24 @@
 </div>
 
 <script>
-  // ── rotating field color ──────────────────────────────────────────────
-  const FIELDS = ["#E4A234", "#8FC4CF", "#A9BC9B", "#E0967E", "#A9A5C9"];
-  const last = parseInt(localStorage.getItem("lastFieldIdx") ?? "-1", 10);
-  let idx;
-  do { idx = Math.floor(Math.random() * FIELDS.length); } while (idx === last);
-  localStorage.setItem("lastFieldIdx", idx);
-  document.documentElement.style.setProperty("--field", FIELDS[idx]);
-  // the four helix strands take the other four colors, shuffled
-  const STRANDS = FIELDS.filter((_, i) => i !== idx).sort(() => Math.random() - 0.5);
+  // ── rotating color system ─────────────────────────────────────────────
+  // Accent: one color drawn from all palettes, new on every load.
+  // Braid: a whole palette, never one that contains the accent.
+  const PALETTES = [
+    ["#d46d7a", "#eea78c", "#b4cdc2", "#00b49b"],  // old rose · vinaceous cinnamon · glaucous green · sea green
+    ["#da525d", "#c59f6b", "#96d1aa", "#b984af"],  // eugenia red · maple · cobalt green · lilac
+    ["#f37f94", "#cab356", "#a7d4e4", "#78cdd0"],  // eosine pink · pyrite yellow · pale king's blue · calamine blue
+    ["#ffefae", "#eeb480", "#c5a56e", "#c2ae93"],  // pale lemon yellow · pinkish cinnamon · isabella · ecru
+    ["#f48067", "#fdbf68", "#b5decc", "#78cdd0"],  // grenadine pink · cream yellow · turquoise green · calamine blue
+  ];
+  const ALL = [...new Set(PALETTES.flat())];
+  const lastAccent = localStorage.getItem("lastAccent");
+  let accent;
+  do { accent = ALL[Math.floor(Math.random() * ALL.length)]; } while (accent === lastAccent);
+  localStorage.setItem("lastAccent", accent);
+  document.documentElement.style.setProperty("--field", accent);
+  const eligible = PALETTES.filter(p => !p.includes(accent));
+  const STRANDS = eligible[Math.floor(Math.random() * eligible.length)].slice().sort(() => Math.random() - 0.5);
 
   // favicon: BK in a circle of the visit's color
   (function () {
@@ -771,7 +780,7 @@
     c.width = c.height = 64;
     const x = c.getContext("2d");
     x.beginPath(); x.arc(32, 32, 32, 0, Math.PI * 2);
-    x.fillStyle = FIELDS[idx]; x.fill();
+    x.fillStyle = accent; x.fill();
     x.fillStyle = "#12100C";
     x.font = "700 26px 'Helvetica Neue', Helvetica, Arial, sans-serif";
     x.textAlign = "center"; x.textBaseline = "middle";
