@@ -48,10 +48,13 @@
   /* ═══ inner chrome ═══ */
   .band { height:10px; background:var(--field); }
   .sitehead { position:sticky; top:0; z-index:20; background:var(--paper); border-bottom:1px solid var(--hair); }
-  .sitehead .topbar { padding:14px 0 13px; }
+  .sitehead .topbar { padding:10px 0; }
   .shell { max-width:1060px; margin:0 auto; padding:0 48px; }
-  .topbar { display:flex; justify-content:flex-end; align-items:baseline; }
-  .topbar nav { display:flex; gap:24px; }
+  .topbar { display:flex; align-items:center; }
+  .topbar nav { display:flex; gap:24px; margin-left:auto; }
+  /* the BK roundel — same mark as the favicon, links home */
+  .bkmark { width:27px; height:27px; border-radius:50%; background:var(--field); color:var(--ink); font-size:11px; font-weight:700; letter-spacing:-.02em; display:flex; align-items:center; justify-content:center; text-decoration:none; cursor:pointer; flex-shrink:0; }
+  .bkmark:hover { filter:brightness(.95); }
   .topbar nav a { font-size:13.5px; text-decoration:none; padding-bottom:3px; border-bottom:2px solid transparent; cursor:pointer; }
   .topbar nav a:hover { border-bottom-color:var(--hair); }
   .topbar nav a.on { border-bottom-color:var(--field); }
@@ -179,6 +182,7 @@
     <div class="band"></div>
     <div class="shell">
       <div class="topbar">
+        <a class="bkmark" data-nav="home" title="Home" aria-label="Home">BK</a>
         <nav>
           <a data-nav="chronology">Chronology</a><a data-nav="ai">Work with AI</a><a data-nav="playground">Playground</a><a data-nav="publications">Publications</a><a data-nav="about">About</a>
         </nav>
@@ -350,6 +354,7 @@
     <div class="band"></div>
     <div class="shell">
       <div class="topbar">
+        <a class="bkmark" data-nav="home" title="Home" aria-label="Home">BK</a>
         <nav>
           <a data-nav="chronology">Chronology</a><a data-nav="ai">Work with AI</a><a data-nav="playground">Playground</a><a data-nav="publications">Publications</a><a data-nav="about">About</a>
         </nav>
@@ -491,6 +496,7 @@
     <div class="band"></div>
     <div class="shell">
       <div class="topbar">
+        <a class="bkmark" data-nav="home" title="Home" aria-label="Home">BK</a>
         <nav>
           <a data-nav="chronology">Chronology</a><a data-nav="ai">Work with AI</a><a data-nav="playground">Playground</a><a data-nav="publications">Publications</a><a data-nav="about">About</a>
         </nav>
@@ -577,6 +583,7 @@
     <div class="band"></div>
     <div class="shell">
       <div class="topbar">
+        <a class="bkmark" data-nav="home" title="Home" aria-label="Home">BK</a>
         <nav>
           <a data-nav="chronology">Chronology</a><a data-nav="ai">Work with AI</a><a data-nav="playground">Playground</a><a data-nav="publications">Publications</a><a data-nav="about">About</a>
         </nav>
@@ -646,6 +653,7 @@
     <div class="band"></div>
     <div class="shell">
       <div class="topbar">
+        <a class="bkmark" data-nav="home" title="Home" aria-label="Home">BK</a>
         <nav>
           <a data-nav="chronology">Chronology</a><a data-nav="ai">Work with AI</a><a data-nav="playground">Playground</a><a data-nav="publications">Publications</a><a data-nav="about">About</a>
         </nav>
